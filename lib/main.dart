@@ -97,16 +97,13 @@ class MyHomePage extends StatelessWidget {
                   buildButton('3', onPressed: () {
                     calculator.Value_Check(3);
                   }),
-                  buildButton('-', onPressed: () {
-                    calculator.Value_Check('-');
-                  }),
+                  buildButton('-',
+                      onPressed: () => calculator.Value_Check('-')),
                 ],
               ),
               Row(
                 children: [
-                  buildButton('0', onPressed: () {
-                    calculator.Value_Check(0);
-                  }),
+                  buildButton('0', onPressed: () => calculator.Value_Check(0)),
                   buildButton('AC', onPressed: () {
                     calculator.Value_Check('AC');
                   }),
@@ -125,10 +122,12 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
-  Widget buildButton(String buttonText, {required Null Function() onPressed}) {
+  Widget buildButton(String buttonText, {required VoidCallback onPressed}) {
     return Expanded(
       child: MaterialButton(
-        onPressed: () {},
+        onPressed: () {
+          onPressed();
+        },
         child: Text(
           buttonText,
           style: const TextStyle(fontSize: 24.0),
