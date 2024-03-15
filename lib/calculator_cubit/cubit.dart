@@ -3,4 +3,14 @@ import 'package:new_calculator/calculator_cubit/state.dart';
 
 class CounterCubit extends Cubit<CounterState> {
   CounterCubit() : super(InitialState());
+
+  int counter = 0;
+
+  void minus() {
+    counter--;
+  }
+
+  void plus() {
+    counter++;
+  }
 }

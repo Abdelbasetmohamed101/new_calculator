@@ -31,12 +31,13 @@ class MyHomePage extends StatelessWidget {
   MyHomePage({super.key, required this.title});
 
   final String title;
-
-  int _counter = 0;
-
-  @override
+ @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    @override
+  Widget BlocConsumer<CounterCubit, CounterState>(
+    listener: (context, state){}
+    builder: (context, state) {
+      return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(title),
@@ -48,10 +49,7 @@ class MyHomePage extends StatelessWidget {
             const Text(
               'the counter presents',
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            
             const SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -64,5 +62,13 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
     );
+      
+    },
+  ) {
+    
+  }
   }
 }
+  
+
+
