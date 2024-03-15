@@ -1,16 +1,66 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_calculator/calculator_cubit/state.dart';
 
-class CounterCubit extends Cubit<CounterState> {
-  CounterCubit() : super(InitialState());
-
-  int counter = 0;
-
-  void minus() {
-    counter--;
+class CalculatorCubit extends Cubit<CalculatorState> {
+  CalculatorCubit() : super(InitialState());
+  static CalculatorCubit get(context) => BlocProvider.of(context);
+  dynamic value = 0;
+  dynamic result = 0;
+  int num_1 = 0;
+  int num_2 = 0;
+  String op = '';
+  void Value_Check(value) {
+    if (op == '' && value! is String) {
+      num_1 = value;
+      emit(NumberOneState());
+    } else if (value is String) {
+      op = value;
+      emit(OperatorState());
+    } else if (op != '' && value! is String) {
+      num_2 = value;
+      emit(NumberTwoState());
+    } else if (value == "AC") {
+      op = '';
+      num_1 = 0;
+      num_2 = 0;
+      value = 0;
+      emit(ClearState());
+    } else {
+      value = "error";
+      emit(ErrorState());
+    }
   }
 
-  void plus() {
-    counter++;
+  void resulting() {
+    switch (op) {
+      case '+':
+        result = num_1 + num_2;
+        value = result;
+        emit(PlusState());
+        break;
+      case '-':
+        result = num_1 - num_2;
+        value = result;
+        emit(MinusState());
+        break;
+      case 'x':
+        result = num_1 * num_2;
+        value = result;
+        emit(MultiplyState());
+        break;
+      case '/':
+        if (num_2 == 0) {
+          value = "error";
+          emit(ErrorState());
+        } else {
+          result = num_1 / num_2;
+          value = result;
+        }
+        emit(DivState());
+        break;
+      default:
+        value = "error";
+        emit(ErrorState());
+    }
   }
 }

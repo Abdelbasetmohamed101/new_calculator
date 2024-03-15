@@ -1,7 +1,21 @@
-abstract class CounterState {}
+abstract class CalculatorState {}
 
-class PlusState extends CounterState {}
+class InitialState extends CalculatorState {}
 
-class MinusState extends CounterState {}
+class PlusState extends CalculatorState {}
 
-class InitialState extends CounterState {}
+class MinusState extends CalculatorState {}
+
+class MultiplyState extends CalculatorState {}
+
+class DivState extends CalculatorState {}
+
+class ClearState extends CalculatorState {}
+
+class ErrorState extends CalculatorState {}
+
+class NumberOneState extends CalculatorState {}
+
+class NumberTwoState extends CalculatorState {}
+
+class OperatorState extends CalculatorState {}
